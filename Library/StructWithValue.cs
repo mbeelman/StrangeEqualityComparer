@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Library
 {
-    public struct StructWithValue : IEquatable<StructWithValue>
+    public class StructWithValue : IEquatable<StructWithValue>
     {
         private ushort value;
         public StructWithValue(ushort v)

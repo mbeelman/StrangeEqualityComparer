@@ -11,20 +11,31 @@ namespace TestApp
             // get the default comparer for this type
             var comparer = EqualityComparer<StructWithValue>.Default;
 
-            // loop through the full ushort range.
-            for (ushort i = ushort.MinValue; i <= ushort.MaxValue; i++)
+            try
             {
-                var a = new StructWithValue(i);
-                var b = new StructWithValue(i);
+                checked
+                {
+                    // loop through the full ushort range.
+                    for (ushort i = ushort.MinValue; i <= ushort.MaxValue; i++)
+                    {
+                        var a = new StructWithValue(i);
+                        var b = new StructWithValue(i);
 
-                if (comparer.Equals(a, b))
-                    continue;
+                        if (comparer.Equals(a, b))
+                            continue;
 
-                // the value of 32768 will show this message and end the loop
-                // every value > 32767 is affected...
-                Console.WriteLine($"Problem start at {i}");
-                break;
+                        // the value of 32768 will show this message and end the loop
+                        // every value > 32767 is affected...
+                        Console.WriteLine($"Problem start at {i}");
+                        break;
+                    }
+                }
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Catch OverflowException. Code is running correctly");
             }
         }
+
     }
 }

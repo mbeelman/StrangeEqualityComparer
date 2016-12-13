@@ -23,7 +23,7 @@ namespace Library
 
         public bool Equals(StructWithValue other)
         {
-            return value.Equals(other.value);
+            return value == other.value;
         }
 
         public static bool operator ==(StructWithValue a1, StructWithValue a2)
